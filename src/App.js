@@ -16,7 +16,7 @@ import { useControls, button } from 'leva'
 
 export function App() {
   const { autoRotate, text, shadow, ...config } = useControls({
-    text: 'Inter',
+    text: 'rib·lab',
     backside: false,
     samples: { value: 16, min: 1, max: 32, step: 1 },
     resolution: { value: 512, min: 64, max: 2048, step: 64 },
