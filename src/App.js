@@ -12,47 +12,18 @@ import {
   AccumulativeShadows,
   MeshTransmissionMaterial
 } from '@react-three/drei'
-import { useControls, button } from 'leva'
 
 export function App() {
-  const { autoRotate, text, shadow, ...config } = useControls({
-    text: 'Inter',
-    backside: false,
-    samples: { value: 16, min: 1, max: 32, step: 1 },
-    resolution: { value: 512, min: 64, max: 2048, step: 64 },
-    transmission: { value: 0.6, min: 0, max: 1 },
-    clearcoat: { value: 0, min: 0.1, max: 1 },
-    clearcoatRoughness: { value: 0.0, min: 0, max: 1 },
-    thickness: { value: 0.55, min: 0, max: 5 },
-    chromaticAberration: { value: 5, min: 0, max: 5 },
-    anisotropy: { value: 0.3, min: 0, max: 1, step: 0.01 },
-    roughness: { value: 0.0, min: 0, max: 1, step: 0.01 },
-    distortion: { value: 1, min: 0, max: 4, step: 0.01 },
-    distortionScale: { value: 1, min: 0.01, max: 1, step: 0.01 },
-    temporalDistortion: { value: 0.4, min: 0, max: 1, step: 0.01 },
-    ior: { value: 0.83, min: 0, max: 2, step: 0.01 },
-    color: '#ff9cf5',
-    gColor: '#ff7eb3',
-    shadow: '#750d57',
-    autoRotate: false,
-    screenshot: button(() => {
-      // Save the canvas as a *.png
-      const link = document.createElement('a')
-      link.setAttribute('download', 'canvas.png')
-      link.setAttribute('href', document.querySelector('canvas').toDataURL('image/png').replace('image/png', 'image/octet-stream'))
-      link.click()
-    })
-  })
   return (
     <Canvas shadows orthographic camera={{ position: [10, 20, 20], zoom: 80 }} gl={{ preserveDrawingBuffer: true }}>
       <color attach="background" args={['#f2f2f5']} />
       {/** The text and the grid */}
-      <Text config={config} rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 2.25]}>
-        {text}
+      <Text rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 2.25]}>
+        rib·lab
       </Text>
       {/** Controls */}
       <OrbitControls
-        autoRotate={autoRotate}
+        autoRotate={false}
         autoRotateSpeed={-0.1}
         zoomSpeed={0.25}
         minZoom={40}
@@ -76,7 +47,7 @@ export function App() {
       <AccumulativeShadows
         temporal
         frames={100}
-        color={shadow}
+        color="#750d57"
         colorBlend={5}
         toneMapped={true}
         alphaTest={0.9}
@@ -106,7 +77,7 @@ const Grid = ({ number = 23, lineWidth = 0.026, height = 0.5 }) => (
   </Instances>
 )
 
-function Text({ children, config, font = '/Inter_Medium_Regular.json', ...props }) {
+function Text({ children, font = '/Inter_Medium_Regular.json', ...props }) {
   const texture = useLoader(RGBELoader, 'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/aerodynamics_workshop_1k.hdr')
   return (
     <>
@@ -124,7 +95,7 @@ function Text({ children, config, font = '/Inter_Medium_Regular.json', ...props 
             curveSegments={128}
             bevelThickness={0.01}>
             {children}
-            <MeshTransmissionMaterial reflectivity={0.5} {...config} background={texture} />
+            <MeshTransmissionMaterial reflectivity={0.5} />
           </Text3D>
         </Center>
         <Grid />
