@@ -7,13 +7,13 @@ import { Logo } from '@pmndrs/branding'
 function Overlay() {
   return (
     <div style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none', width: '100%', height: '100%' }}>
-      <a href="https://riblab.cn/" style={{ position: 'absolute', bottom: 40, left: 90, fontSize: '13px' }}>
-        rib·lab
+      <a href="https://pmnd.rs/" style={{ position: 'absolute', bottom: 40, left: 90, fontSize: '13px' }}>
+        pmnd.rs
         <br />
-        排骨实验室
+        dev collective
       </a>
-      <div style={{ position: 'absolute', top: 40, left: 40, fontSize: '13px' }}>🍖 —</div>
-      <div style={{ position: 'absolute', bottom: 40, right: 40, fontSize: '13px' }}>hi@rib.im</div>
+      <div style={{ position: 'absolute', top: 40, left: 40, fontSize: '13px' }}>😄 —</div>
+      <div style={{ position: 'absolute', bottom: 40, right: 40, fontSize: '13px' }}>27/10/2022</div>
     </div>
   )
 }
